@@ -40,6 +40,15 @@
                 </p>
               @enderror
             </div>
+            <div class="form-group">
+                <label for="content">Categoria</label>
+                <select class="form-control" aria-label="Default select example" name="category_id" id="category_id">
+                    <option selected>Seleziona una categoria</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                </select>
+            </div>
 
             <div class="py-5">
                 <button type="submit" class="btn btn-success">Invia</button>

@@ -31,7 +31,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -90,8 +92,10 @@ class PostsController extends Controller
     {
         // $post =  Post::find($id);
 
+        $categories = Category::all();
+
         if ($post){
-            return view('admin.posts.edit', compact('post'));
+            return view('admin.posts.edit', compact('post', 'categories'));
         }
     }
 
