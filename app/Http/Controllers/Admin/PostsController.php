@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
@@ -16,7 +17,11 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->paginate(5);
-        return view('admin.posts.index', compact('posts'));
+
+        $categories = Category::all();
+
+        return view('admin.posts.index', compact('posts', 'categories'));
+
     }
 
     /**

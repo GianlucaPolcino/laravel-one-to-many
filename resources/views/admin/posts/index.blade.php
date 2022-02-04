@@ -12,7 +12,8 @@
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Titolo</th>
-                    <th scope="col" colspan="3" class="text-center">Azioni</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col" colspan="2" class="text-center">Azioni</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,11 @@
                     <tr>
                         <td>{{$post->id}}</td>
                         <td>{{$post->title}}</td>
+                        @if ($post->category)
+                          <td>{{$post->category->name}}</td>
+                        @else
+                          <td> - </td>
+                        @endif
                         <td><a href="{{route('admin.posts.show', $post)}}" class="btn btn-success">Vedi</a></td>
                         <td><a href="{{route('admin.posts.edit', $post)}}" class="btn btn-warning">Modifica</a></td>
 
@@ -36,8 +42,37 @@
                 </tbody>
               </table>
 
-              {{$posts->links()}}
+              <div>
+                {{$posts->links()}}
+              </div>
         </div>
+    </div>
+
+    <div class="container pt-5">
+
+      <h2 class="py-3 text-center">
+        Categorie:
+      </h2>
+
+      @foreach ($categories as $category)
+
+        <h3>
+          {{$category->name}}
+        </h3>
+
+        <ul>
+
+          @foreach ($category->posts as $item)
+            <li>
+              <a href="{{ route('admin.posts.show', $item) }}">
+                {{$item->title}}
+              </a>
+            </li>
+          @endforeach
+
+        </ul>
+        
+      @endforeach
     </div>
 @endsection
 
